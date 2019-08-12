@@ -3,72 +3,76 @@ import { expect } from 'chai';
 import 'mocha';
 
 describe('Customer Service', () => {
-  const service = new CustomerService();
-
   describe('Add Customer Service Method', () => {
     it('Should return true if all values are set correctly.', () => {
-      const result = service.AddCustomer(
+      const customerService = new CustomerService(
         'Marcus',
         'Exner',
         'marcus.exner@bbv.eu',
         '1977-09-25',
         'bbv' // Very important company without credit limit.
       );
+      const result = customerService.addCustomer();
       expect(result).to.be.true;
     });
 
     it('Should return false if email is not valid.', () => {
-      const result = service.AddCustomer(
+      const customerService = new CustomerService(
         'Marcus',
         'Exner',
         'marcus.exner#bbv.eu',
         '1977-09-25',
         'bbv'
       );
+      const result = customerService.addCustomer();
       expect(result).to.be.false;
     });
 
     it('Should be false if firstname AND lastname is missing.', () => {
-      const result = service.AddCustomer(
+      const customerService = new CustomerService(
         '',
         '',
         'marcus.exner@bbv.eu',
         '1977-09-25',
         'bbv'
       );
+      const result = customerService.addCustomer();
       expect(result).to.be.false;
     });
 
     it('Should be false if only firstname is missing.', () => {
-      const result = service.AddCustomer(
+      const customerService = new CustomerService(
         '',
         'Exner',
         'marcus.exner@bbv.eu',
         '1977-09-25',
         'bbv'
       );
+      const result = customerService.addCustomer();
       expect(result).to.be.false;
     });
 
     it('Should be false if only lastname is missing.', () => {
-      const result = service.AddCustomer(
+      const customerService = new CustomerService(
         'Marcus',
         '',
         'marcus.exner@bbv.eu',
         '1977-09-25',
         'bbv'
       );
+      const result = customerService.addCustomer();
       expect(result).to.be.false;
     });
 
     it('Should be false if user is not at least of age 21.', () => {
-      const result = service.AddCustomer(
+      const customerService = new CustomerService(
         'Marcus',
         'Exner',
         'marcus.exner@bbv.eu',
         '2010-09-25',
         'bbv'
       );
+      const result = customerService.addCustomer();
       expect(result).to.be.false;
     });
   });
