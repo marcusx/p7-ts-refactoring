@@ -9,7 +9,8 @@ export class CustomerService {
       return false;
     }
 
-    if (!email.Contains('@') && !email.Contains('.')) {
+    if (!email.includes('@') || !email.includes('.')) {
+      console.log('Email not valid. "@" or ate least one "." is missing.');
       return false;
     }
 
