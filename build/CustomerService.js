@@ -19,6 +19,11 @@ class CustomerService {
         };
     }
     customerNameIsValid() {
+        // Dependent on where the customer data comes from that is used here I would consider to
+        // throw an error in all validation methods. E.g. if it is normally not possible that the input
+        // is invalid because of checks on the input side.
+        // If it is likely that a validation fails a validation object with more details then true/false
+        // might be a good idea.
         if (!this.customer.firstname || !this.customer.lastname) {
             console.log('Firstname OR Lastname missing.');
             return false;
