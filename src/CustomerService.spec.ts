@@ -11,8 +11,8 @@ describe('Customer Service', () => {
         'Marcus',
         'Exner',
         'marcus.exner@bbv.eu',
-        '25.09.1977',
-        'ID1234'
+        '1977-09-25',
+        'bbv' // Very important company without credit limit.
       );
       expect(result).to.be.true;
     });
@@ -22,10 +22,10 @@ describe('Customer Service', () => {
         'Marcus',
         'Exner',
         'marcus.exner#bbv.eu',
-        '25.09.1977',
-        'ID1234'
+        '1977-09-25',
+        'bbv'
       );
-      expect(result).to.be.true;
+      expect(result).to.be.false;
     });
 
     it('Should be false if firstname AND lastname is missing.', () => {
@@ -33,32 +33,32 @@ describe('Customer Service', () => {
         '',
         '',
         'marcus.exner@bbv.eu',
-        '25.09.1977',
-        'ID1234'
+        '1977-09-25',
+        'bbv'
       );
       expect(result).to.be.false;
     });
 
-    it('Should be true if only firstname is missing.', () => {
+    it('Should be false if only firstname is missing.', () => {
       const result = service.AddCustomer(
         '',
         'Exner',
         'marcus.exner@bbv.eu',
-        '25.09.1977',
-        'ID1234'
+        '1977-09-25',
+        'bbv'
       );
-      expect(result).to.be.true;
+      expect(result).to.be.false;
     });
 
-    it('Should be true if only lastname is missing.', () => {
+    it('Should be false if only lastname is missing.', () => {
       const result = service.AddCustomer(
         'Marcus',
         '',
         'marcus.exner@bbv.eu',
-        '25.09.1977',
-        'ID1234'
+        '1977-09-25',
+        'bbv'
       );
-      expect(result).to.be.true;
+      expect(result).to.be.false;
     });
 
     it('Should be false if user is not at least of age 21.', () => {
@@ -66,8 +66,8 @@ describe('Customer Service', () => {
         'Marcus',
         'Exner',
         'marcus.exner@bbv.eu',
-        '25.09.2010',
-        'ID1234'
+        '2010-09-25',
+        'bbv'
       );
       expect(result).to.be.false;
     });

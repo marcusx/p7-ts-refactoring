@@ -32,6 +32,7 @@ export class CustomerService {
       Firstname: firstname,
       Surname: lastname
     };
+
     if (company.Name == 'VeryImportantClient') {
       // Skip credit check
       customer.HasCreditLimit = false;
@@ -42,6 +43,7 @@ export class CustomerService {
     }
 
     if (customer.HasCreditLimit && customer.CreditLimit < 500) {
+      console.log('Credit limit not sufficent.');
       return false;
     }
 
