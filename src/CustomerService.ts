@@ -3,8 +3,8 @@ import { Customer } from './Customer';
 import { CustomerDataAccess } from './CustomerDataAccess';
 
 export class CustomerService {
-  AddCustomer(firname, surname, email, dateOfBirth, companyId) {
-    if (!firname || !surname) {
+  AddCustomer(firstname, lastname, email, dateOfBirth, companyId) {
+    if (!firstname || !lastname) {
       console.log('Firstname OR Lastname missing.');
       return false;
     }
@@ -26,8 +26,8 @@ export class CustomerService {
       Company: company,
       DateOfBirth: dateOfBirth,
       EmailAddress: email,
-      Firstname: firname,
-      Surname: surname
+      Firstname: firstname,
+      Surname: lastname
     };
     if (company.Name == 'VeryImportantClient') {
       // Skip credit check
