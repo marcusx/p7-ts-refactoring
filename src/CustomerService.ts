@@ -4,57 +4,83 @@ import { Customer } from './Customer';
 import { CustomerDataAccess } from './CustomerDataAccess';
 
 export class CustomerService {
-  addCustomer(
+  private customer: Customer;
+
+  constructor(
     firstname: string,
     lastname: string,
     email: string,
     dateOfBirth: string,
     companyId: string
   ) {
-    if (!firstname || !lastname) {
+    const companyRepository = new CompanyRepository();
+
+    this.customer = {
+      firstname: firstname,
+      lastname: lastname,
+      emailAddress: email,
+      dateOfBirth: dateOfBirth,
+      creditLimit: 0,
+      company: companyRepository.getById(companyId)
+    };
+  }
+
+  customerNameIsValid() {
+    if (!this.customer.firstname || !this.customer.lastname) {
       console.log('Firstname OR Lastname missing.');
       return false;
     }
+    return true;
+  }
 
-    if (!email.includes('@') || !email.includes('.')) {
+  emailIsValid() {
+    if (
+      !this.customer.emailAddress.includes('@') ||
+      !this.customer.emailAddress.includes('.')
+    ) {
       console.log('Email not valid. "@" or ate least one "." is missing.');
       return false;
     }
+    return true;
+  }
 
-    const age = moment().diff(dateOfBirth, 'years');
+  customerAgeIsLegal() {
+    const age = moment().diff(this.customer.dateOfBirth, 'years');
     console.log('AGE: ', age);
     if (age < 21) {
       console.log('User not old enough. Needs to be above 21.');
       return false;
     }
+    return true;
+  }
 
-    var companyRepository = new CompanyRepository();
-    var company = companyRepository.GetById(companyId);
-
-    var customer: Customer = {
-      Company: company,
-      DateOfBirth: dateOfBirth,
-      EmailAddress: email,
-      Firstname: firstname,
-      Surname: lastname
-    };
-
-    if (company.Name == 'VeryImportantClient') {
+  processCreditLimit() {
+    if (this.customer.company.Name == 'VeryImportantClient') {
       // Skip credit check
-      customer.HasCreditLimit = false;
+      this.customer.hasCreditLimit = false;
     } else {
       // Do credit check
-      customer.HasCreditLimit = true;
-      customer.CreditLimit = 10;
+      this.customer.hasCreditLimit = true;
+      this.customer.creditLimit = 10;
     }
+  }
 
-    if (customer.HasCreditLimit && customer.CreditLimit < 500) {
+  customerCreditLimitOk() {
+    if (this.customer.hasCreditLimit && this.customer.creditLimit < 500) {
       console.log('Credit limit not sufficent.');
       return false;
+    } else {
+      return true;
     }
+  }
 
-    CustomerDataAccess.AddCustomer(customer);
+  addCustomer() {
+    if (!this.customerNameIsValid()) return false;
+    if (!this.emailIsValid()) return false;
+    if (!this.customerAgeIsLegal()) return false;
+    if (!this.customerCreditLimitOk()) return false;
 
+    CustomerDataAccess.AddCustomer(this.customer);
     return true;
   }
 }
