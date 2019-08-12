@@ -1,7 +1,7 @@
-import { Classification } from "./Classification";
+import { Classification } from './Classification';
 
 export class Company {
-    Id;
-    Name;
-    Classification: Classification;
+  Id;
+  Name;
+  Classification: Classification;
 }

@@ -1,7 +1,6 @@
 ﻿export class CustomerDataAccess {
-    static AddCustomer(customer) {
-        //do not worry
-
-        // fake insert
-    }
+  static AddCustomer(customer) {
+    //do not worry
+    // fake insert
+  }
 }
