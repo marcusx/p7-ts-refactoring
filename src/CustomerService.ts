@@ -4,7 +4,7 @@ import { Customer } from './Customer';
 import { CustomerDataAccess } from './CustomerDataAccess';
 
 export class CustomerService {
-  AddCustomer(
+  addCustomer(
     firstname: string,
     lastname: string,
     email: string,

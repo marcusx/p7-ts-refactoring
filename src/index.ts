@@ -2,11 +2,11 @@ import { CustomerService } from './CustomerService';
 
 console.log('Good morning');
 const customerService = new CustomerService();
-const addCustomer = customerService.AddCustomer(
+const addCustomer = customerService.addCustomer(
   'Marcus',
-  '',
+  'Exner',
   'marcus.exner@bbv.eu',
   '1977-09-25',
-  'bbv'
+  'irgendwas'
 );
 console.log(addCustomer);
