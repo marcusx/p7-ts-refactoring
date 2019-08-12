@@ -1,4 +1,5 @@
-﻿import { CompanyRepository } from './CompanyRepository';
+﻿import moment from 'moment';
+import { CompanyRepository } from './CompanyRepository';
 import { Customer } from './Customer';
 import { CustomerDataAccess } from './CustomerDataAccess';
 
@@ -14,9 +15,10 @@ export class CustomerService {
       return false;
     }
 
-    var now = Date();
-    var age = datediff('y', dateOfBirth, now);
+    const age = moment().diff(dateOfBirth, 'years');
+    console.log('AGE: ', age);
     if (age < 21) {
+      console.log('User not old enough. Needs to be above 21.');
       return false;
     }
 
@@ -47,19 +49,4 @@ export class CustomerService {
 
     return true;
   }
-}
-
-// datepart: 'y', 'm', 'w', 'd', 'h', 'n', 's'
-function datediff(datepart, fromdate, todate) {
-  datepart = datepart.toLowerCase();
-  var diff = todate - fromdate;
-  var divideBy = {
-    w: 604800000,
-    d: 86400000,
-    h: 3600000,
-    n: 60000,
-    s: 1000
-  };
-
-  return Math.floor(diff / divideBy[datepart]);
 }
