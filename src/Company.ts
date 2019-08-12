@@ -1,7 +1,7 @@
 import { Classification } from './Classification';
 
 export class Company {
-  Id;
-  Name;
+  Id: string;
+  Name: string;
   Classification: Classification;
 }
