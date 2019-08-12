@@ -4,7 +4,8 @@ import { CustomerDataAccess } from './CustomerDataAccess';
 
 export class CustomerService {
   AddCustomer(firname, surname, email, dateOfBirth, companyId) {
-    if (firname || surname) {
+    if (!firname || !surname) {
+      console.log('Firstname OR Lastname missing.');
       return false;
     }
 
