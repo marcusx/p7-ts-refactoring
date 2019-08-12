@@ -2,7 +2,7 @@
 import { Classification } from './Classification';
 
 export class CompanyRepository {
-  GetById(id): Company {
+  GetById(id: string): Company {
     if (id === 'bbv') {
       return {
         Id: id,
