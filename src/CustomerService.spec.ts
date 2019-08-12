@@ -76,4 +76,32 @@ describe('Customer Service', () => {
       expect(result).to.be.false;
     });
   });
+
+  describe('Customer Name Is Valid Method', () => {
+    it('Should be false if user firstname is missing.', () => {
+      const customerService = new CustomerService(
+        '',
+        'Exner',
+        'marcus.exner@bbv.eu',
+        '2010-09-25',
+        'bbv'
+      );
+      const result = customerService.customerNameIsValid();
+      expect(result).to.be.false;
+    });
+  });
+
+  describe('Credit limit is ok.', () => {
+    it('Should be false if user is not important.', () => {
+      const customerService = new CustomerService(
+        '',
+        'Exner',
+        'marcus.exner@bbv.eu',
+        '2010-09-25',
+        'irgendwas'
+      );
+      const result = customerService.customerCreditLimitOk();
+      expect(result).to.be.false;
+    });
+  });
 });

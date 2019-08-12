@@ -21,6 +21,7 @@ export class CustomerService {
       emailAddress: email,
       dateOfBirth: dateOfBirth,
       creditLimit: 0,
+      hasCreditLimit: true,
       company: companyRepository.getById(companyId)
     };
   }
@@ -71,10 +72,15 @@ export class CustomerService {
   }
 
   customerCreditLimitOk() {
-    if (this.customer.hasCreditLimit && this.customer.creditLimit < 500) {
+    this.processCreditLimit();
+    if (
+      this.customer.hasCreditLimit === true &&
+      this.customer.creditLimit < 500
+    ) {
       console.log('Credit limit not sufficent.');
       return false;
     } else {
+      console.log('Credit limit ok.');
       return true;
     }
   }
