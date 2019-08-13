@@ -1,11 +1,11 @@
-import { Company } from "./Company";
+import { Company } from './Company';
 
 export class Customer {
-    Firstname;
-    Surname;
-    DateOfBirth;
-    EmailAddress;
-    HasCreditLimit?;
-    CreditLimit?;
-    Company: Company;
+  firstname!: string;
+  lastname!: string;
+  dateOfBirth!: string;
+  emailAddress!: string;
+  hasCreditLimit?: boolean;
+  creditLimit!: number;
+  company!: Company;
 }

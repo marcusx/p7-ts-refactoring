@@ -1,8 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Customer = /** @class */ (function () {
-    function Customer() {
-    }
-    return Customer;
-}());
+class Customer {
+}
 exports.Customer = Customer;

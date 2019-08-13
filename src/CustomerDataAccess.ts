@@ -1,7 +1,8 @@
-﻿export class CustomerDataAccess {
-    static AddCustomer(customer) {
-        //do not worry
+﻿import { Customer } from './Customer';
 
-        // fake insert
-    }
+export class CustomerDataAccess {
+  static AddCustomer(customer: Customer) {
+    //do not worry
+    // fake insert
+  }
 }

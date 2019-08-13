@@ -1,33 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CustomerService_1 = require("./CustomerService");
-var chai_1 = require("chai");
+const CustomerService_1 = require("./CustomerService");
+const chai_1 = require("chai");
 require("mocha");
-describe('Customer Service', function () {
-    var service = new CustomerService_1.CustomerService();
-    describe('Add Customer Service Method', function () {
-        it('Should return true if all values are set correctly.', function () {
-            var result = service.AddCustomer('Marcus', 'Exner', 'marcus.exner@bbv.eu', '25.09.1977', 'ID1234');
+describe('Customer Service', () => {
+    describe('Add Customer Service Method', () => {
+        it('Should return true if all values are set correctly.', () => {
+            const customerService = new CustomerService_1.CustomerService('Marcus', 'Exner', 'marcus.exner@bbv.eu', '1977-09-25', 'bbv' // Very important company without credit limit.
+            );
+            const result = customerService.addCustomer();
             chai_1.expect(result).to.be.true;
         });
-        it('Should return false if email is not valid.', function () {
-            var result = service.AddCustomer('Marcus', 'Exner', 'marcus.exner#bbv.eu', '25.09.1977', 'ID1234');
-            chai_1.expect(result).to.be.true;
-        });
-        it('Should be false if firstname AND lastname is missing.', function () {
-            var result = service.AddCustomer('', '', 'marcus.exner@bbv.eu', '25.09.1977', 'ID1234');
+        it('Should return false if email is not valid.', () => {
+            const customerService = new CustomerService_1.CustomerService('Marcus', 'Exner', 'marcus.exner#bbv.eu', '1977-09-25', 'bbv');
+            const result = customerService.addCustomer();
             chai_1.expect(result).to.be.false;
         });
-        it('Should be true if only firstname is missing.', function () {
-            var result = service.AddCustomer('', 'Exner', 'marcus.exner@bbv.eu', '25.09.1977', 'ID1234');
-            chai_1.expect(result).to.be.true;
+        it('Should be false if firstname AND lastname is missing.', () => {
+            const customerService = new CustomerService_1.CustomerService('', '', 'marcus.exner@bbv.eu', '1977-09-25', 'bbv');
+            const result = customerService.addCustomer();
+            chai_1.expect(result).to.be.false;
         });
-        it('Should be true if only lastname is missing.', function () {
-            var result = service.AddCustomer('Marcus', '', 'marcus.exner@bbv.eu', '25.09.1977', 'ID1234');
-            chai_1.expect(result).to.be.true;
+        it('Should be false if only firstname is missing.', () => {
+            const customerService = new CustomerService_1.CustomerService('', 'Exner', 'marcus.exner@bbv.eu', '1977-09-25', 'bbv');
+            const result = customerService.addCustomer();
+            chai_1.expect(result).to.be.false;
         });
-        it('Should be false if user is not at least of age 21.', function () {
-            var result = service.AddCustomer('Marcus', 'Exner', 'marcus.exner@bbv.eu', '25.09.2010', 'ID1234');
+        it('Should be false if only lastname is missing.', () => {
+            const customerService = new CustomerService_1.CustomerService('Marcus', '', 'marcus.exner@bbv.eu', '1977-09-25', 'bbv');
+            const result = customerService.addCustomer();
+            chai_1.expect(result).to.be.false;
+        });
+        it('Should be false if user is not at least of age 21.', () => {
+            const customerService = new CustomerService_1.CustomerService('Marcus', 'Exner', 'marcus.exner@bbv.eu', '2010-09-25', 'bbv');
+            const result = customerService.addCustomer();
+            chai_1.expect(result).to.be.false;
+        });
+    });
+    describe('Customer Name Is Valid Method', () => {
+        it('Should be false if user firstname is missing.', () => {
+            const customerService = new CustomerService_1.CustomerService('', 'Exner', 'marcus.exner@bbv.eu', '2010-09-25', 'bbv');
+            const result = customerService.customerNameIsValid();
+            chai_1.expect(result).to.be.false;
+        });
+    });
+    describe('Credit limit is ok.', () => {
+        it('Should be false if user is not important.', () => {
+            const customerService = new CustomerService_1.CustomerService('', 'Exner', 'marcus.exner@bbv.eu', '2010-09-25', 'irgendwas');
+            const result = customerService.customerCreditLimitOk();
             chai_1.expect(result).to.be.false;
         });
     });
